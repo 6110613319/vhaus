@@ -1,0 +1,35 @@
+{% extends 'randomStr/layout.html'%}
+
+{% block body %}
+<center>
+    {% if message %}
+        <h1>{{message}}</h1>
+    {% endif %}
+<!------------------------------------------------------------------------------------->
+<form action="{% url 'home'%}" method="POST">
+    {% csrf_token %}
+    <button type="submit">Home</button>
+</form>
+<!------------------------------------------------------------------------------------->
+    {% for s in randomStr %}
+    <ul>
+        {{s.randomStr}}
+        <form action="deleteRandomString" method="POST">
+            {% csrf_token %}
+             <button type="submit" name="deleteRandomString" value="{{s.randomStr}}">Delete</button>
+        </form>
+    </ul>
+    {% endfor %}
+<!-------------------------------------------------------------------------------------->
+    {% for s in allString %}
+    <ul>
+        {{s.randomStr}}
+        <form action="deleteRandomString" method="POST">
+            {% csrf_token %}
+            <button type="submit" name="deleteRandomString" value="{{s.randomStr}}">Delete</button>
+        </form>
+    </ul>
+    {% endfor %}
+
+</center>
+{% endblock body %}

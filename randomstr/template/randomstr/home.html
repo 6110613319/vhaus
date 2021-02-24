@@ -1,0 +1,40 @@
+{% extends 'randomStr/layout.html'%}
+
+{% block body %}
+<center>
+    
+    <h3>Press the button to Random String</h3>
+    
+    {% if message %}
+        <h1>{{message}}</h1>
+    {% endif %}
+<!------------------------------------------------------------------------------>  
+    <form action="{% url 'randomString' %}" method="POST">
+        {% csrf_token %}
+        <label>Enter length of string</label>
+        <input type="number" name="lengthofstring" size="15%" required><br>
+
+        <label>Enter group of string</label>
+        <input type="number" name="groupofstring" size="15%" required><br>
+        
+        <button type="submit">Random</button>
+    </form>
+<!------------------------------------------------------------------------------->
+    <form action="{% url 'allRandomString' %}" method="POST">
+        {% csrf_token %}
+        <button type="submit">All Strings</button>
+    </form>
+<!------------------------------------------------------------------------------->
+    <form action="{% url 'addRandomString' %}" method="POST">
+        {% csrf_token %}
+        <button name="add" value="{{letter}}" type="submit">Submit</button>
+        {% for s in letter %}
+            <ul> {{s}} </ul>
+        {% endfor %}
+    </form>
+
+
+</center>
+
+   
+{% endblock body %}
