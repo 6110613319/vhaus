@@ -1,35 +1,46 @@
 {% extends 'randomStr/layout.html'%}
 
 {% block body %}
-<center>
-    {% if message %}
-        <h1>{{message}}</h1>
-    {% endif %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'allRandom.css' %}">
+<div class="container">
+        <h1>All Random Strings</h1>
+        {% if message %}
+        <div style="color:#191970"><h3>{{message}}</h3></div>
+        {% endif %}
 <!------------------------------------------------------------------------------------->
 <form action="{% url 'home'%}" method="POST">
     {% csrf_token %}
     <button type="submit">Home</button>
 </form>
 <!------------------------------------------------------------------------------------->
+    <table>
     {% for s in randomStr %}
-    <ul>
-        {{s.randomStr}}
-        <form action="deleteRandomString" method="POST">
-            {% csrf_token %}
-             <button type="submit" name="deleteRandomString" value="{{s.randomStr}}">Delete</button>
-        </form>
-    </ul>
-    {% endfor %}
-<!-------------------------------------------------------------------------------------->
-    {% for s in allString %}
-    <ul>
-        {{s.randomStr}}
-        <form action="deleteRandomString" method="POST">
+    <tr>
+         <td>
+            <form action="deleteRandomString" method="POST">
             {% csrf_token %}
             <button type="submit" name="deleteRandomString" value="{{s.randomStr}}">Delete</button>
+            <td>{{s.randomStr}}</td>                
         </form>
-    </ul>
+        </td>
+    </tr>
     {% endfor %}
+    </table>    
+<!-------------------------------------------------------------------------------------->
+    <table>
+    {% for s in allString %}
+    <tr>
+        <td>
+            <form action="deleteRandomString" method="POST">
+                {% csrf_token %}
+            <button type="submit" name="deleteRandomString" value="{{s.randomStr}}">Delete</button>
+            <td>{{s.randomStr}}</td>
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+    </table>
 
-</center>
+</div>
 {% endblock body %}

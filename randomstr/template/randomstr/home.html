@@ -1,23 +1,21 @@
 {% extends 'randomStr/layout.html'%}
 
 {% block body %}
-<center>
-    
-    <h3>Press the button to Random String</h3>
-    
+{% load static %}
+<link rel="stylesheet" href="{% static 'home.css' %}">
+
+<div class="container">
+
+    <h1>Random String</h1>
     {% if message %}
-        <h1>{{message}}</h1>
+    <div style="color:red">{{message}}</div>
     {% endif %}
 <!------------------------------------------------------------------------------>  
-    <form action="{% url 'randomString' %}" method="POST">
+    <form action="{% url 'randomString' %}" id ="formhome"method="POST">
         {% csrf_token %}
-        <label>Enter length of string</label>
-        <input type="number" name="lengthofstring" size="15%" required><br>
-
-        <label>Enter group of string</label>
-        <input type="number" name="groupofstring" size="15%" required><br>
-        
-        <button type="submit">Random</button>
+        <input type="number" name="lengthofstring" placeholder="Enter length of string"  required>
+        <input type="number" name="groupofstring" placeholder="Enter group of string"  required>
+        <div><button type="submit" >Random</button></div>
     </form>
 <!------------------------------------------------------------------------------->
     <form action="{% url 'allRandomString' %}" method="POST">
@@ -28,13 +26,14 @@
     <form action="{% url 'addRandomString' %}" method="POST">
         {% csrf_token %}
         <button name="add" value="{{letter}}" type="submit">Submit</button>
+        <table>
         {% for s in letter %}
-            <ul> {{s}} </ul>
+            <tr>
+                <td>{{s}}</td>
+            </tr>
         {% endfor %}
+        </table>
     </form>
-
-
-</center>
-
-   
+ 
+</div>   
 {% endblock body %}

@@ -1,27 +1,23 @@
 {% extends 'randomStr/layout.html'%}
 
 {% block body %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'listRandom.css' %}">
+<div class="container">
 <center>
-
-    <h2>String are already exit can not record this String</h2>
-    
-    {% if message %}
-        <h1>{{message}}</h1>
-    {% endif %}
+    <h1>String are already exit can not record this String</h1>
 
     <form action="{% url 'home' %}" method="POST">
         {% csrf_token %}
         <button type="submit">Home</button>
     </form>
-
+    <table>
     {% for s in repeatString %}
-        <ul> {{s}} </ul>
+        <tr>
+            <td>{{s}}</td>
+        </tr>
     {% endfor %}
-
-
+    </table>
 </center>
-
-
-
-
+</div>>
 {% endblock body %}

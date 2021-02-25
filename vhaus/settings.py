@@ -32,12 +32,21 @@ ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     'randomstr',
+    'dbbackup',
+    'django_crontab',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+]
+
+DBBACKUP_STORAGE = 'django.core.files.storage.FileSystemStorage'
+DBBACKUP_STORAGE_OPTIONS = {'location': BASE_DIR / 'backup'}
+
+CRONJOBS = [
+    ('*/1 * * * *','vhaus.crop.my_backup')
 ]
 
 MIDDLEWARE = [
